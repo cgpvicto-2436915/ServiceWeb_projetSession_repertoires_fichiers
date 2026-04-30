@@ -1,0 +1,150 @@
+<!DOCTYPE html><!-- HTML et CSS fait par felix, assisté par ChatGPT (Autorisé par le professeur)-->
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Épreuve finale - Services Web H26</title>
+    <script defer src="./js/script.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f5f5f5;
+        }
+
+        .window-bar {
+            background: #ddd;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+        }
+
+        .window-bar span {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        .columns {
+            display: flex;
+            gap: 40px;
+        }
+
+        .column {
+            flex: 1;
+        }
+
+        .divider {
+            width: 1px;
+            background: #ccc;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            margin-top: 15px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #aaa;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        .checkbox {
+            margin-top: 15px;
+            display: flex;
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 10px 20px;
+            border: 2px solid black;
+            background: white;
+            cursor: pointer;
+            float: right;
+        }
+
+        button:hover {
+            background: #eee;
+        }
+
+        .clear {
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Épreuve finale - Services Web H26</h1>
+    <div class="subtitle">Félix Gagné</div>
+
+    <div class="columns">
+        <!-- Colonne gauche -->
+        <div class="column">
+            <h2>Création d'une bibliothèque</h2>
+
+            <label>Nom de la bibliothèque</label>
+            <input type="text" placeholder="Votre bibliothèque" id="input-nom-biblio">
+
+            <label>Courriel</label>
+            <input type="email" placeholder="Votre courriel" id="input-courriel-creation">
+
+            <label>Mot de passe</label>
+            <input type="password" placeholder="********" id="input-mot-de-passe-creation">
+
+            <button id="btn-ajouter">Créer</button>
+            <div class="clear"></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Colonne droite -->
+        <div class="column">
+            <h2>Récupération d'une clé api</h2>
+
+            <label>Courriel</label>
+            <input type="email" placeholder="Votre courriel" id="input-courriel-recup">
+
+            <label>Mot de passe</label>
+            <input type="password" placeholder="********" id="input-mot-de-passe-recup">
+
+            <div class="checkbox">
+                <input type="checkbox" id="newKey" checked>
+                <label for="newKey">Générer une nouvelle clé</label>
+            </div>
+
+            <button id="btn-recup">Récupérer</button>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

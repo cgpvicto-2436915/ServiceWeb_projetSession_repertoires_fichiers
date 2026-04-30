@@ -1,0 +1,178 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mui/toolpad/v0.11.0/docs/schemas/v1/definitions.json#properties/Page
+
+apiVersion: v1
+kind: page
+spec:
+  title: Default page
+  alias:
+    - A2UCmye
+  content:
+    - component: PageRow
+      name: pageRow
+      props:
+        justifyContent: start
+      children:
+        - component: PageColumn
+          name: pageColumn
+          layout:
+            columnSize: 1
+          children:
+            - component: Text
+              name: text
+              props:
+                value: Liste des livres
+                variant: h2
+            - component: DataGrid
+              name: dataGrid
+              layout:
+                columnSize: 1
+              props:
+                rows:
+                  $$jsExpression: liste.data
+                columns:
+                  - field: id
+                    type: number
+                    width: 50
+                  - field: titre
+                    type: string
+                  - field: description
+                    type: string
+                  - field: auteur
+                    type: string
+                  - field: isbn
+                    type: string
+                    width: 93
+                  - field: disponible
+                    type: boolean
+            - component: Text
+              name: text5
+              props:
+                value: Ajouter un livre
+            - component: Form
+              name: form
+            - component: Text
+              name: text6
+              props:
+                value: Modifier un livre
+            - component: Form
+              name: form1
+        - component: PageColumn
+          name: pageColumn1
+          layout:
+            columnSize: 1
+          children:
+            - component: Text
+              name: text1
+              props:
+                value: Détail du livre
+                variant: h3
+            - component: PageRow
+              name: pageRow1
+              props:
+                justifyContent: start
+              children:
+                - component: Text
+                  name: text2
+                  props:
+                    value: "Titre :"
+                  layout:
+                    columnSize: 0.3112033195020747
+                - component: Text
+                  name: text3
+                  layout:
+                    columnSize: 1.6887966804979253
+            - component: PageRow
+              name: pageRow2
+              props:
+                justifyContent: start
+              children:
+                - component: Text
+                  name: text4
+                  props:
+                    value: "Auteur :"
+                  layout:
+                    columnSize: 0.3112033195020747
+                - component: Text
+                  name: text10
+                  layout:
+                    columnSize: 1.6887966804979253
+            - component: PageRow
+              name: pageRow3
+              props:
+                justifyContent: start
+              children:
+                - component: Text
+                  name: text9
+                  props:
+                    value: "isbn :"
+                  layout:
+                    columnSize: 0.3112033195020747
+                - component: Text
+                  name: text11
+                  layout:
+                    columnSize: 1.6887966804979253
+            - component: PageRow
+              name: pageRow4
+              props:
+                justifyContent: start
+              children:
+                - component: Text
+                  name: text12
+                  props:
+                    value: "Description :"
+                  layout:
+                    columnSize: 0.6554267650158061
+                - component: Text
+                  name: text13
+                  layout:
+                    columnSize: 1.344573234984194
+            - component: PageRow
+              name: pageRow5
+              props:
+                justifyContent: start
+              children:
+                - component: Text
+                  name: text14
+                  props:
+                    value: "Disponible :"
+                  layout:
+                    columnSize: 0.6554267650158061
+                - component: Text
+                  name: text15
+                  layout:
+                    columnSize: 1.344573234984194
+            - component: Text
+              name: text16
+              props:
+                value: "prêts:"
+                loading: false
+                variant: h6
+            - component: DataGrid
+              name: dataGrid1
+              layout:
+                columnSize: 1
+            - component: Text
+              name: text7
+              props:
+                value: Ajouter un prêt
+            - component: Form
+              name: form2
+            - component: Text
+              name: text8
+              props:
+                value: Modifier un prêt
+            - component: Form
+              name: form3
+  queries:
+    - name: liste
+      mode: query
+      query:
+        kind: rest
+        url: https://serviceweb-projetsession-sw.onrender.com/api/livre?tous=1
+        headers:
+          [{ name: Authorization, value: { $$jsExpression: parameters.cle } }]
+        method: GET
+      parameters:
+        - name: cle
+          value:
+            $$env: API_KEY
