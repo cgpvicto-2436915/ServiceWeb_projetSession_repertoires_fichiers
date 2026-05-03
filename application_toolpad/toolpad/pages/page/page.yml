@@ -56,7 +56,7 @@ spec:
                       props:
                         content: Rafraichir
                         onClick:
-                          $$jsExpressionAction: liste.refetch();
+                          $$jsExpressionAction: "liste.refetch();\r\ndetail.refetch();"
                 - component: Button
                   name: button
                   layout:
@@ -189,11 +189,15 @@ spec:
                           props:
                             label: Id
                             isRequired: true
+                            defaultValue:
+                              $$jsExpression: 'dataGrid.selection ? dataGrid.selection.id : ""'
                         - component: TextField
                           name: MTitreLivre
                           props:
                             isRequired: true
                             label: Titre
+                            defaultValue:
+                              $$jsExpression: 'dataGrid.selection ? dataGrid.selection.titre : ""'
                           layout:
                             columnSize: 1
                         - component: TextField
@@ -204,11 +208,15 @@ spec:
                             fullWidth: false
                             size: small
                             variant: outlined
+                            defaultValue:
+                              $$jsExpression: 'dataGrid.selection ? dataGrid.selection.auteur : ""'
                         - component: TextField
                           name: MISBN
                           props:
                             label: ISBN
                             isRequired: true
+                            defaultValue:
+                              $$jsExpression: 'dataGrid.selection ? dataGrid.selection.isbn : ""'
                     - component: PageColumn
                       name: pageColumn1
                       layout:
@@ -223,11 +231,14 @@ spec:
                             label: Description
                             minLength: 0
                             size: medium
+                            defaultValue:
+                              $$jsExpression: 'dataGrid.selection ? dataGrid.selection.description : ""'
                         - component: Checkbox
                           name: MDispoLivre
                           props:
-                            mode: checkbox
+                            mode: checkBox
                             label: Disponible
+                            disabled: false
         - component: PageColumn
           name: pageColumn5
           layout:
@@ -328,16 +339,45 @@ spec:
                   props:
                     value:
                       $$jsExpression: 'dataGrid.selection?.disponible ? "Disponible" : "Emprunté"'
-            - component: Text
-              name: text16
+            - component: PageRow
+              name: pageRow10
               props:
-                value: "prêts:"
-                loading: false
-                variant: h6
+                justifyContent: start
+              children:
+                - component: Text
+                  name: text16
+                  props:
+                    value: "prêts:"
+                    loading: false
+                    variant: h6
+                - component: Button
+                  name: button3
+                  layout:
+                    columnSize: 1.523328803672803
+                    horizontalAlign: end
+                  props:
+                    content: Changer statut
+                    disabled:
+                      $$jsExpression: "dataGrid1.selection ? false: true"
+                    onClick:
+                      $$jsExpressionAction: StatutPret.call()
+                - component: Button
+                  name: button4
+                  layout:
+                    horizontalAlign: end
+                    columnSize: 0.476671196327197
+                  props:
+                    fullWidth: true
+                    content: Supprimer
+                    disabled:
+                      $$jsExpression: dataGrid1.selection ? false:true
+                    onClick:
+                      $$jsExpressionAction: SupprimerPret.call()
             - component: DataGrid
               name: dataGrid1
               layout:
                 columnSize: 1
+                height: 359.97686767578125
               props:
                 rowIdField: null
                 rows:
@@ -359,12 +399,122 @@ spec:
                 value: Ajouter un prêt
             - component: Form
               name: form2
+              children:
+                - component: PageRow
+                  name: pageRow9
+                  props:
+                    justifyContent: start
+                  children:
+                    - component: PageColumn
+                      name: pageColumn8
+                      layout:
+                        columnSize: 1
+                      children:
+                        - component: TextField
+                          name: AEmprunteur
+                          layout:
+                            columnSize: 1
+                          props:
+                            label: Emprunteur
+                            isRequired: true
+                        - component: Checkbox
+                          name: AEnCours
+                          props:
+                            mode: checkbox
+                            label: En cours
+                    - component: PageColumn
+                      name: pageColumn7
+                      layout:
+                        columnSize: 1
+                      children:
+                        - component: DatePicker
+                          name: ADateDebut
+                          layout:
+                            columnSize: 1
+                          props:
+                            isRequired: true
+                            label: Date début
+                            variant: outlined
+                            format:
+                              $$jsExpression: '"YYYY/MM/DD"'
+                        - component: DatePicker
+                          name: ADateFin
+                          props:
+                            isRequired: true
+                            label: Date retour
+                            format:
+                              $$jsExpression: '"YYYY/MM/DD"'
+              props:
+                submitButtonText: Ajouter
+                formControlsAlign: start
+                onSubmit:
+                  $$jsExpressionAction: AjouterPret.call()
             - component: Text
               name: text8
               props:
                 value: Modifier un prêt
             - component: Form
-              name: form3
+              name: form1
+              props:
+                submitButtonText: Modifier
+                formControlsAlign: start
+                onSubmit:
+                  $$jsExpressionAction: ModifierPret.call()
+              children:
+                - component: PageRow
+                  name: pageRow11
+                  props:
+                    justifyContent: start
+                  children:
+                    - component: PageColumn
+                      name: pageColumn9
+                      layout:
+                        columnSize: 1
+                      children:
+                        - component: TextField
+                          name: MIdPret
+                          props:
+                            label: Id
+                            defaultValue:
+                              $$jsExpression: dataGrid1.selection ? dataGrid1.selection?.id :""
+                        - component: TextField
+                          name: MEmprunteur
+                          layout:
+                            columnSize: 1
+                          props:
+                            label: Emprunteur
+                            isRequired: true
+                            defaultValue:
+                              $$jsExpression: dataGrid1.selection ? dataGrid1.selection?.emprunteur :""
+                        - component: Checkbox
+                          name: MEnCours
+                          props:
+                            mode: checkbox
+                            label: En cours
+                    - component: PageColumn
+                      name: pageColumn10
+                      layout:
+                        columnSize: 1
+                      children:
+                        - component: DatePicker
+                          name: MDateDebut
+                          layout:
+                            columnSize: 1
+                          props:
+                            isRequired: true
+                            label: Date début
+                            variant: outlined
+                            format:
+                              $$jsExpression: '"YYYY/MM/DD"'
+                            defaultValue: null
+                        - component: DatePicker
+                          name: MDateFin
+                          props:
+                            isRequired: true
+                            label: Date retour
+                            format:
+                              $$jsExpression: '"YYYY/MM/DD"'
+                            defaultValue: null
   queries:
     - name: liste
       mode: query
@@ -456,7 +606,7 @@ spec:
         body:
           kind: raw
           content:
-            $$jsExpression: "`{\"titre\":\"${parameters.data.MTItreLivre}\",\r
+            $$jsExpression: "`{\"titre\":\"${parameters.data.MTitreLivre}\",\r
 
               \"auteur\":\"${parameters.data.MAuteurLivre}\",\r
 
@@ -531,3 +681,137 @@ spec:
         - name: id
           value:
             $$jsExpression: dataGrid.selection?.id
+    - name: AjouterPret
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`${parameters.url}/pret`"
+        searchParams: []
+        headers:
+          - name: Authorization
+            value:
+              $$jsExpression: parameters.cle
+        body:
+          kind: raw
+          content:
+            $$jsExpression: "`{\"livre_id\":\"${parameters.id_livre}\",\r
+
+              \"emprunteur\":\"${parameters.data.AEmprunteur}\",\r
+
+              \"date_debut\":\"${parameters.data.ADateDebut}\",\r
+
+              \"date_retour\":\"${parameters.data.ADateFin}\",\r
+
+              \"en_cours\":${parameters.data.AEnCours?true:false}\r
+
+              }`"
+          contentType: application/json
+        method: POST
+      parameters:
+        - name: url
+          value:
+            $$env: HOST_API
+        - name: cle
+          value:
+            $$env: API_KEY
+        - name: data
+          value:
+            $$jsExpression: form2.value
+        - name: id_livre
+          value:
+            $$jsExpression: dataGrid.selection?.id
+    - name: SupprimerPret
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`${parameters.url}/pret/${parameters.id}`"
+        searchParams: []
+        headers:
+          - name: Authorization
+            value:
+              $$jsExpression: parameters.cle
+        body:
+          kind: raw
+          content: ""
+          contentType: application/json
+        method: DELETE
+      parameters:
+        - name: url
+          value:
+            $$env: HOST_API
+        - name: cle
+          value:
+            $$env: API_KEY
+        - name: id
+          value:
+            $$jsExpression: dataGrid1.selection?.id
+    - name: StatutPret
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`${parameters.url}/pret/${parameters.id}/statut`"
+        searchParams: []
+        headers:
+          - name: Authorization
+            value:
+              $$jsExpression: parameters.cle
+        body:
+          kind: raw
+          content: ""
+          contentType: application/json
+        method: PUT
+      parameters:
+        - name: url
+          value:
+            $$env: HOST_API
+        - name: cle
+          value:
+            $$env: API_KEY
+        - name: id
+          value:
+            $$jsExpression: dataGrid1.selection?.id
+    - name: ModifierPret
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`${parameters.url}/pret/${parameters.data.MIdPret}`"
+        searchParams: []
+        headers:
+          - name: Authorization
+            value:
+              $$jsExpression: parameters.cle
+        body:
+          kind: raw
+          content:
+            $$jsExpression: "`{\"livre_id\":\"${parameters.id_livre}\",\r
+
+              \"emprunteur\":\"${parameters.data.MEmprunteur}\",\r
+
+              \"date_debut\":\"${parameters.data.MDateDebut}\",\r
+
+              \"date_retour\":\"${parameters.data.MDateFin}\",\r
+
+              \"en_cours\":${parameters.data.MEnCours?true:false}\r
+
+              }`"
+          contentType: application/json
+        method: PUT
+      parameters:
+        - name: url
+          value:
+            $$env: HOST_API
+        - name: cle
+          value:
+            $$env: API_KEY
+        - name: data
+          value:
+            $$jsExpression: form1.value
+        - name: id_livre
+          value:
+            $$jsExpression: dataGrid.selection?.id
+        - name: test
+          value: null
