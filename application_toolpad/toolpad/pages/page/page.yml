@@ -48,6 +48,7 @@ spec:
                           $$jsExpressionAction: "StatutLivre.call();\r
 
                             liste.refetch()"
+                        variant: contained
                     - component: Button
                       name: button2
                       layout:
@@ -118,6 +119,7 @@ spec:
                           props:
                             isRequired: true
                             label: Titre
+                            name: ITItreLivre
                         - component: TextField
                           name: IAuteurLivre
                           props:
@@ -126,11 +128,13 @@ spec:
                             variant: outlined
                             isRequired: true
                             label: Auteur
+                            name: IAuteurLivre
                         - component: TextField
                           name: IISBN
                           props:
                             label: ISBN
                             isRequired: true
+                            name: IISBN
                     - component: PageColumn
                       name: pageColumn3
                       layout:
@@ -145,12 +149,14 @@ spec:
                             label: Description
                             minLength: 0
                             size: medium
+                            name: IDescLivre
                         - component: Checkbox
                           name: IDispoLivre
                           props:
                             mode: checkBox
                             label: Disponible
                             isRequired: false
+                            name: IDispoLivre
               props:
                 submitButtonText: Ajouter
                 hasResetButton: false
@@ -191,6 +197,7 @@ spec:
                             isRequired: true
                             defaultValue:
                               $$jsExpression: 'dataGrid.selection ? dataGrid.selection.id : ""'
+                            name: MIdLivre
                         - component: TextField
                           name: MTitreLivre
                           props:
@@ -198,6 +205,7 @@ spec:
                             label: Titre
                             defaultValue:
                               $$jsExpression: 'dataGrid.selection ? dataGrid.selection.titre : ""'
+                            name: MTitreLivre
                           layout:
                             columnSize: 1
                         - component: TextField
@@ -210,6 +218,7 @@ spec:
                             variant: outlined
                             defaultValue:
                               $$jsExpression: 'dataGrid.selection ? dataGrid.selection.auteur : ""'
+                            name: MAuteurLivre
                         - component: TextField
                           name: MISBN
                           props:
@@ -217,6 +226,7 @@ spec:
                             isRequired: true
                             defaultValue:
                               $$jsExpression: 'dataGrid.selection ? dataGrid.selection.isbn : ""'
+                            name: MISBN
                     - component: PageColumn
                       name: pageColumn1
                       layout:
@@ -233,12 +243,14 @@ spec:
                             size: medium
                             defaultValue:
                               $$jsExpression: 'dataGrid.selection ? dataGrid.selection.description : ""'
+                            name: MDescLivre
                         - component: Checkbox
                           name: MDispoLivre
                           props:
                             mode: checkBox
                             label: Disponible
                             disabled: false
+                            name: MDispoLivre
         - component: PageColumn
           name: pageColumn5
           layout:
@@ -350,22 +362,36 @@ spec:
                     value: "prêts:"
                     loading: false
                     variant: h6
+                  layout:
+                    columnSize: 1.3527391849601305
+                - component: Button
+                  name: button5
+                  layout:
+                    horizontalAlign: end
+                    columnSize: 0.6472608150398694
+                  props:
+                    content: Rafraichir
+                    onClick:
+                      $$jsExpressionAction: detail.refetch()
+                    disabled:
+                      $$jsExpression: dataGrid.selection? false:true
                 - component: Button
                   name: button3
                   layout:
-                    columnSize: 1.523328803672803
                     horizontalAlign: end
+                    columnSize: 1.3513890312226609
                   props:
                     content: Changer statut
                     disabled:
                       $$jsExpression: "dataGrid1.selection ? false: true"
                     onClick:
                       $$jsExpressionAction: StatutPret.call()
+                    fullWidth: true
                 - component: Button
                   name: button4
                   layout:
+                    columnSize: 0.6486109687773391
                     horizontalAlign: end
-                    columnSize: 0.476671196327197
                   props:
                     fullWidth: true
                     content: Supprimer
@@ -379,20 +405,23 @@ spec:
                 columnSize: 1
                 height: 359.97686767578125
               props:
-                rowIdField: null
                 rows:
                   $$jsExpression: 'dataGrid.selection ? detail.data?.prets : ""'
                 columns:
-                  - field: id
-                    type: number
-                  - field: emprunteur
-                    type: string
-                  - field: date_debut
-                    type: dateTime
-                  - field: date_retour
-                    type: dateTime
-                  - field: statut
-                    type: string
+                  [
+                    { field: id, type: number, editable: false },
+                    { field: emprunteur, type: string, editable: false },
+                    {
+                      field: date_debut,
+                      type: date,
+                      dateFormat: { kind: shorthand, dateStyle: short },
+                      editable: false,
+                      filterable: true,
+                    },
+                    { field: date_retour, type: date, editable: false },
+                    { field: statut, type: string },
+                  ]
+                rowIdField: id
             - component: Text
               name: text7
               props:
@@ -417,11 +446,13 @@ spec:
                           props:
                             label: Emprunteur
                             isRequired: true
+                            name: AEmprunteur
                         - component: Checkbox
                           name: AEnCours
                           props:
                             mode: checkbox
                             label: En cours
+                            name: AEnCours
                     - component: PageColumn
                       name: pageColumn7
                       layout:
@@ -437,6 +468,7 @@ spec:
                             variant: outlined
                             format:
                               $$jsExpression: '"YYYY/MM/DD"'
+                            name: ADateDebut
                         - component: DatePicker
                           name: ADateFin
                           props:
@@ -444,6 +476,7 @@ spec:
                             label: Date retour
                             format:
                               $$jsExpression: '"YYYY/MM/DD"'
+                            name: ADateFin
               props:
                 submitButtonText: Ajouter
                 formControlsAlign: start
@@ -477,6 +510,7 @@ spec:
                             label: Id
                             defaultValue:
                               $$jsExpression: dataGrid1.selection ? dataGrid1.selection?.id :""
+                            name: MIdPret
                         - component: TextField
                           name: MEmprunteur
                           layout:
@@ -486,11 +520,13 @@ spec:
                             isRequired: true
                             defaultValue:
                               $$jsExpression: dataGrid1.selection ? dataGrid1.selection?.emprunteur :""
+                            name: MEmprunteur
                         - component: Checkbox
                           name: MEnCours
                           props:
                             mode: checkbox
                             label: En cours
+                            name: MEnCours
                     - component: PageColumn
                       name: pageColumn10
                       layout:
@@ -506,7 +542,9 @@ spec:
                             variant: outlined
                             format:
                               $$jsExpression: '"YYYY/MM/DD"'
-                            defaultValue: null
+                            defaultValue:
+                              $$jsExpression: dataGrid1.selection ? dataGrid1.selection?.date_debut :""
+                            name: MDateDebut
                         - component: DatePicker
                           name: MDateFin
                           props:
@@ -514,7 +552,9 @@ spec:
                             label: Date retour
                             format:
                               $$jsExpression: '"YYYY/MM/DD"'
-                            defaultValue: null
+                            defaultValue:
+                              $$jsExpression: dataGrid1.selection ? dataGrid1.selection?.date_retour :""
+                            name: MDateFin
   queries:
     - name: liste
       mode: query
