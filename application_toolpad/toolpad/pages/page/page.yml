@@ -15,13 +15,62 @@ spec:
         - component: PageColumn
           name: pageColumn
           layout:
-            columnSize: 1
+            columnSize: 0.9993628629949008
           children:
-            - component: Text
-              name: text
+            - component: PageRow
+              name: pageRow8
               props:
-                value: Liste des livres
-                variant: h2
+                justifyContent: start
+              children:
+                - component: Text
+                  name: text
+                  props:
+                    value: Liste des livres
+                    variant: h2
+                  layout:
+                    columnSize: 1.5266646052217872
+                - component: PageColumn
+                  name: pageColumn6
+                  layout:
+                    columnSize: 1
+                  children:
+                    - component: Button
+                      name: button1
+                      layout:
+                        columnSize: 1
+                        horizontalAlign: end
+                        verticalAlign: end
+                      props:
+                        content: Changer statut
+                        disabled:
+                          $$jsExpression: dataGrid.selection ? false:true
+                        onClick:
+                          $$jsExpressionAction: "StatutLivre.call();\r
+
+                            liste.refetch()"
+                    - component: Button
+                      name: button2
+                      layout:
+                        horizontalAlign: end
+                        verticalAlign: end
+                      props:
+                        content: Rafraichir
+                        onClick:
+                          $$jsExpressionAction: liste.refetch();
+                - component: Button
+                  name: button
+                  layout:
+                    horizontalAlign: end
+                    verticalAlign: end
+                    columnSize: 0.47331102359929744
+                  props:
+                    content: Supprimer
+                    onClick:
+                      $$jsExpressionAction: "SupprimerLivre.call();\r
+
+                        liste.refetch();"
+                    disabled:
+                      $$jsExpression: "dataGrid.selection ? false: true"
             - component: DataGrid
               name: dataGrid
               layout:
@@ -44,22 +93,145 @@ spec:
                     width: 93
                   - field: disponible
                     type: boolean
+                rowsSource: prop
             - component: Text
               name: text5
               props:
                 value: Ajouter un livre
             - component: Form
               name: form
+              children:
+                - component: PageRow
+                  name: pageRow6
+                  props:
+                    justifyContent: start
+                  children:
+                    - component: PageColumn
+                      name: pageColumn2
+                      layout:
+                        columnSize: 1
+                      children:
+                        - component: TextField
+                          name: ITItreLivre
+                          layout:
+                            columnSize: 1
+                          props:
+                            isRequired: true
+                            label: Titre
+                        - component: TextField
+                          name: IAuteurLivre
+                          props:
+                            fullWidth: false
+                            size: small
+                            variant: outlined
+                            isRequired: true
+                            label: Auteur
+                        - component: TextField
+                          name: IISBN
+                          props:
+                            label: ISBN
+                            isRequired: true
+                    - component: PageColumn
+                      name: pageColumn3
+                      layout:
+                        columnSize: 1
+                      children:
+                        - component: TextField
+                          name: IDescLivre
+                          layout:
+                            columnSize: 1
+                          props:
+                            isRequired: true
+                            label: Description
+                            minLength: 0
+                            size: medium
+                        - component: Checkbox
+                          name: IDispoLivre
+                          props:
+                            mode: checkBox
+                            label: Disponible
+                            isRequired: false
+              props:
+                submitButtonText: Ajouter
+                hasResetButton: false
+                formControlsFullWidth: false
+                formControlsAlign: start
+                onSubmit:
+                  $$jsExpressionAction: "AjouterLivre.call();\r
+
+                    liste.refetch();"
             - component: Text
               name: text6
               props:
                 value: Modifier un livre
             - component: Form
-              name: form1
+              name: form4
+              props:
+                submitButtonText: Modifier
+                formControlsAlign: start
+                onSubmit:
+                  $$jsExpressionAction: "ModifierLivre.call();\r
+
+                    liste.refetch()"
+              children:
+                - component: PageRow
+                  name: pageRow7
+                  props:
+                    justifyContent: start
+                  children:
+                    - component: PageColumn
+                      name: pageColumn4
+                      layout:
+                        columnSize: 1
+                      children:
+                        - component: TextField
+                          name: MIdLivre
+                          props:
+                            label: Id
+                            isRequired: true
+                        - component: TextField
+                          name: MTitreLivre
+                          props:
+                            isRequired: true
+                            label: Titre
+                          layout:
+                            columnSize: 1
+                        - component: TextField
+                          name: MAuteurLivre
+                          props:
+                            label: Auteur
+                            isRequired: true
+                            fullWidth: false
+                            size: small
+                            variant: outlined
+                        - component: TextField
+                          name: MISBN
+                          props:
+                            label: ISBN
+                            isRequired: true
+                    - component: PageColumn
+                      name: pageColumn1
+                      layout:
+                        columnSize: 1
+                      children:
+                        - component: TextField
+                          name: MDescLivre
+                          layout:
+                            columnSize: 1
+                          props:
+                            isRequired: true
+                            label: Description
+                            minLength: 0
+                            size: medium
+                        - component: Checkbox
+                          name: MDispoLivre
+                          props:
+                            mode: checkbox
+                            label: Disponible
         - component: PageColumn
-          name: pageColumn1
+          name: pageColumn5
           layout:
-            columnSize: 1
+            columnSize: 1.000637137005099
           children:
             - component: Text
               name: text1
@@ -81,6 +253,9 @@ spec:
                   name: text3
                   layout:
                     columnSize: 1.6887966804979253
+                  props:
+                    value:
+                      $$jsExpression: 'dataGrid.selection ? dataGrid.selection.titre : ""'
             - component: PageRow
               name: pageRow2
               props:
@@ -96,6 +271,9 @@ spec:
                   name: text10
                   layout:
                     columnSize: 1.6887966804979253
+                  props:
+                    value:
+                      $$jsExpression: 'dataGrid.selection ? dataGrid.selection.auteur : ""'
             - component: PageRow
               name: pageRow3
               props:
@@ -111,6 +289,9 @@ spec:
                   name: text11
                   layout:
                     columnSize: 1.6887966804979253
+                  props:
+                    value:
+                      $$jsExpression: 'dataGrid.selection ? dataGrid.selection.isbn : ""'
             - component: PageRow
               name: pageRow4
               props:
@@ -126,6 +307,9 @@ spec:
                   name: text13
                   layout:
                     columnSize: 1.344573234984194
+                  props:
+                    value:
+                      $$jsExpression: 'dataGrid.selection ? dataGrid.selection.description : ""'
             - component: PageRow
               name: pageRow5
               props:
@@ -134,13 +318,16 @@ spec:
                 - component: Text
                   name: text14
                   props:
-                    value: "Disponible :"
+                    value: "Statut :"
                   layout:
                     columnSize: 0.6554267650158061
                 - component: Text
                   name: text15
                   layout:
                     columnSize: 1.344573234984194
+                  props:
+                    value:
+                      $$jsExpression: 'dataGrid.selection?.disponible ? "Disponible" : "Emprunté"'
             - component: Text
               name: text16
               props:
@@ -151,6 +338,21 @@ spec:
               name: dataGrid1
               layout:
                 columnSize: 1
+              props:
+                rowIdField: null
+                rows:
+                  $$jsExpression: 'dataGrid.selection ? detail.data?.prets : ""'
+                columns:
+                  - field: id
+                    type: number
+                  - field: emprunteur
+                    type: string
+                  - field: date_debut
+                    type: dateTime
+                  - field: date_retour
+                    type: dateTime
+                  - field: statut
+                    type: string
             - component: Text
               name: text7
               props:
@@ -168,11 +370,164 @@ spec:
       mode: query
       query:
         kind: rest
-        url: https://serviceweb-projetsession-sw.onrender.com/api/livre?tous=1
+        url:
+          $$jsExpression: "`${parameters.url}/livre?tous=1`"
         headers:
           [{ name: Authorization, value: { $$jsExpression: parameters.cle } }]
         method: GET
+        searchParams: []
       parameters:
         - name: cle
           value:
             $$env: API_KEY
+        - name: url
+          value:
+            $$env: HOST_API
+    - name: detail
+      mode: query
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`${parameters.url}/livre/${parameters.id}`"
+        headers:
+          [{ name: Authorization, value: { $$jsExpression: parameters.cle } }]
+        method: GET
+        searchParams: []
+      parameters:
+        - name: url
+          value:
+            $$env: HOST_API
+        - name: cle
+          value:
+            $$env: API_KEY
+        - name: id
+          value:
+            $$jsExpression: dataGrid.selection?.id
+      enabled:
+        $$jsExpression: dataGrid.selection != null
+    - name: AjouterLivre
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`${parameters.url}/livre`"
+        headers:
+          - name: Authorization
+            value:
+              $$jsExpression: parameters.cle
+        method: POST
+        body:
+          kind: raw
+          content:
+            $$jsExpression: "`{\"titre\":\"${parameters.data.ITItreLivre}\",\r
+
+              \"auteur\":\"${parameters.data.IAuteurLivre}\",\r
+
+              \"isbn\":\"${parameters.data.IISBN}\",\r
+
+              \"description\":\"${parameters.data.IDescLivre}\",\r
+
+              \"disponible\":${parameters.data.IDispoLivre?true:false}\r
+
+              }`"
+          contentType: application/json
+        searchParams: []
+      parameters:
+        - name: url
+          value:
+            $$env: HOST_API
+        - name: cle
+          value:
+            $$env: API_KEY
+        - name: data
+          value:
+            $$jsExpression: form.value
+    - name: ModifierLivre
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`${parameters.url}/livre/${parameters.data.MIdLivre}`"
+        searchParams: []
+        headers:
+          - name: Authorization
+            value:
+              $$jsExpression: parameters.cle
+        body:
+          kind: raw
+          content:
+            $$jsExpression: "`{\"titre\":\"${parameters.data.MTItreLivre}\",\r
+
+              \"auteur\":\"${parameters.data.MAuteurLivre}\",\r
+
+              \"isbn\":\"${parameters.data.MISBN}\",\r
+
+              \"description\":\"${parameters.data.MDescLivre}\",\r
+
+              \"disponible\":${parameters.data.MDispoLivre?true:false}\r
+
+              }`"
+          contentType: application/json
+        method: PUT
+      parameters:
+        - name: url
+          value:
+            $$env: HOST_API
+        - name: cle
+          value:
+            $$env: API_KEY
+        - name: data
+          value:
+            $$jsExpression: form4.value
+    - name: SupprimerLivre
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`${parameters.url}/livre/${parameters.id}`"
+        searchParams: []
+        headers:
+          - name: Authorization
+            value:
+              $$jsExpression: parameters.cle
+        body:
+          kind: raw
+          content: ""
+          contentType: application/json
+        method: DELETE
+      parameters:
+        - name: url
+          value:
+            $$env: HOST_API
+        - name: cle
+          value:
+            $$env: API_KEY
+        - name: id
+          value:
+            $$jsExpression: dataGrid.selection?.id
+    - name: StatutLivre
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`${parameters.url}/livre/${parameters.id}/statut`"
+        searchParams: []
+        headers:
+          - name: Authorization
+            value:
+              $$jsExpression: parameters.cle
+        body:
+          kind: raw
+          content: ""
+          contentType: application/json
+        method: PUT
+      parameters:
+        - name: url
+          value:
+            $$env: HOST_API
+        - name: cle
+          value:
+            $$env: API_KEY
+        - name: id
+          value:
+            $$jsExpression: dataGrid.selection?.id
