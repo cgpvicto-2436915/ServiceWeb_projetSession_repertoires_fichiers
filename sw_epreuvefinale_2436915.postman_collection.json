@@ -1,0 +1,498 @@
+{
+  "info": {
+    "_postman_id": "5b948283-0371-41b5-92c8-4e760f3a2006",
+    "name": "sw_epreuvefinale_2436915",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51577268",
+    "_collection_link": "https://go.postman.co/collection/51577268-5b948283-0371-41b5-92c8-4e760f3a2006?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "utilisateurs",
+      "item": [
+        {
+          "name": "creeUnUtilisateur",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nom\" : \"BiblioFelix\",\r\n    \"courriel\" : \"gagne.felix07@gmail.com\",\r\n    \"mot_de_passe\" : \"1234\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/utilisateur",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "utilisateur"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "recupererCleAPI-pasCompte",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"courriel\" : \"math@cegepvicto.ca\",\r\n    \"mot_de_passe\" : \"123patates\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/utilisateur/cle?nouvelle=1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "utilisateur",
+                "cle"
+              ],
+              "query": [
+                {
+                  "key": "nouvelle",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "recupererCleAPI",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"courriel\" : \"gagne.felix07@gmail.com\",\r\n    \"mot_de_passe\" : \"1234\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/utilisateur/cle?nouvelle=1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "utilisateur",
+                "cle"
+              ],
+              "query": [
+                {
+                  "key": "nouvelle",
+                  "value": "1",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "recupererCleAPI - nouvelle",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"courriel\" : \"gagne.felix07@gmail.com\",\r\n    \"mot_de_passe\" : \"1234\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/utilisateur/cle?nouvelle=1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "utilisateur",
+                "cle"
+              ],
+              "query": [
+                {
+                  "key": "nouvelle",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "livre",
+      "item": [
+        {
+          "name": "listeLivre",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "cle_api c3f84368-5059-46c5-b299-bea331d29ba9",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3030/api/livre?tous=1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3030",
+              "path": [
+                "api",
+                "livre"
+              ],
+              "query": [
+                {
+                  "key": "tous",
+                  "value": "1",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "listeLivre - tous",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "cle_api c3f84368-5059-46c5-b299-bea331d29ba9",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/api/livre?tous=1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "livre"
+              ],
+              "query": [
+                {
+                  "key": "tous",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "detailLivre",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "cle_api c3f84368-5059-46c5-b299-bea331d29ba9",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/api/livre/8",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "livre",
+                "8"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "AjouterLivre",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "cle_api c3f84368-5059-46c5-b299-bea331d29ba9",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"titre\":\"test\",\r\n    \"description\":\"Test ajout\",\r\n    \"auteur\":\"Marcel\",\r\n    \"isbn\":\"gfhdbdgbdf\",\r\n    \"disponible\":true\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/livre",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "livre"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ModifierLivre",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "cle_api c3f84368-5059-46c5-b299-bea331d29ba9",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"titre\":\"test\",\r\n    \"description\":\"\",\r\n    \"auteur\":\"Marcel\",\r\n    \"isbn\":\"gfhdbdgbdf\",\r\n    \"disponible\":true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/livre/4",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "livre",
+                "4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ModifierStatutLivre",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "cle_api c3f84368-5059-46c5-b299-bea331d29ba9",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"titre\":\"test\",\r\n    \"description\":\"\",\r\n    \"auteur\":\"Marcel\",\r\n    \"isbn\":\"gfhdbdgbdf\",\r\n    \"disponible\":true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/livre/1/statut",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "livre",
+                "1",
+                "statut"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "SupprimeLivre",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "cle_api c3f84368-5059-46c5-b299-bea331d29ba9",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/livre/15",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "livre",
+                "15"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "pret",
+      "item": [
+        {
+          "name": "AjouterPret",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "cle_api c3f84368-5059-46c5-b299-bea331d29ba9",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"livre_id\": \"1\",\r\n  \"emprunteur\": \"testdate\",\r\n  \"date_debut\": \"2026-05-25\",\r\n  \"date_retour\": \"2026-05-28\",\r\n  \"en_cours\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/pret",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "pret"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ModifierPret",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "cle_api c3f84368-5059-46c5-b299-bea331d29ba9",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"emprunteur\": \"kevin2\",\r\n  \"date_debut\": \"2026-04-28\",\r\n  \"date_retour\": \"2026-05-28\",\r\n  \"en_cours\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/pret/1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "pret",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ModifierStatutPret",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "cle_api c3f84368-5059-46c5-b299-bea331d29ba9",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/api/pret/1/statut",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "pret",
+                "1",
+                "statut"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "SupprimerPret",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "cle_api c3f84368-5059-46c5-b299-bea331d29ba9",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/api/pret/1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "pret",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
